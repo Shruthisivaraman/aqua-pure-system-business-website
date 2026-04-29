@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery Management - AQUA PURE SYSTEM Admin</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .admin-navbar {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-navbar .navbar-brand {
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .admin-navbar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease;
+            text-decoration: none;
+        }
+
+        .admin-navbar .nav-link:hover {
+            color: white;
+        }
+
+        .admin-navbar .nav-link.active {
+            color: white;
+            border-bottom: 2px solid white;
+            padding-bottom: 0.25rem;
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: #1f2937;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .upload-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+            border: 1px solid #e5e7eb;
+        }
+
+        .upload-card h3 {
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .form-label {
+            color: #374151;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .form-control,
+        .form-select {
+            border: 1px solid #d1d5db;
+            border-radius: 10px;
+            padding: 0.75rem 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus,
+        .form-select:focus {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .image-preview {
+            margin-top: 1.5rem;
+            padding: 1.5rem;
+            background: #f9fafb;
+            border-radius: 10px;
+            border: 2px dashed #d1d5db;
+            text-align: center;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .image-preview img {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-preview .placeholder-text {
+            color: #9ca3af;
+            font-size: 0.95rem;
+        }
+
+        .file-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-input-wrapper input[type="file"] {
+            display: none;
+        }
+
+        .file-input-label {
+            display: block;
+            padding: 0.75rem 1rem;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            color: #1e3a8a;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: 2px solid #3b82f6;
+        }
+
+        .file-input-label:hover {
+            background: linear-gradient(135deg, #bfdbfe 0%, #93c5fd 100%);
+            transform: translateY(-2px);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+            color: white;
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .gallery-grid {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+        }
+
+        .gallery-grid h3 {
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.25rem;
+        }
+
+        .gallery-item-card {
+            background: #ffffff;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 2px solid #0066cc;
+            transition: all 0.3s ease;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .gallery-item-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #e5e7eb;
+        }
+
+        .gallery-item-content {
+            padding: 1.5rem;
+            background: #ffffff;
+        }
+
+        .gallery-item-title {
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .gallery-item-meta {
+            font-size: 0.85rem;
+            color: #333333;
+            margin-bottom: 1rem;
+            background: #f0f4f8;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .gallery-item-meta span {
+            display: inline-block;
+            margin-right: 1rem;
+        }
+
+        .gallery-item-actions {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .btn-edit {
+            background: #dbeafe;
+            color: #1e3a8a;
+        }
+
+        .btn-edit:hover {
+            background: #bfdbfe;
+            text-decoration: none;
+        }
+
+        .btn-delete {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .btn-delete:hover {
+            background: #fecaca;
+            text-decoration: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+            color: #6b7280;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .alert-message {
+            border-radius: 10px;
+            border: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-content {
+            border-radius: 15px;
+            border: 1px solid #e5e7eb;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #e5e7eb;
+            padding: 1.5rem;
+        }
+
+        .logout-btn {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.5);
+            color: white;
+            text-decoration: none;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 1rem;
+            }
+
+            .upload-card,
+            .gallery-grid {
+                padding: 1.5rem;
+            }
+
+            .gallery-item-actions {
+                flex-direction: column;
+            }
+
+            .btn-sm {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Navigation -->
+    <nav class="admin-navbar">
+        <div class="container-fluid">
+            <div class="row w-100 align-items-center">
+                <div class="col-auto">
+                    <span class="navbar-brand">
+                        <i class="fas fa-images me-2"></i>Gallery Manager
+                    </span>
+                </div>
+                <div class="col">
+                    <div class="d-flex align-items-center gap-2" style="margin-left: 2rem;">
+                        <a href="admin-dashboard.html" class="nav-link" style="margin-bottom: 0;">
+                            <i class="fas fa-chart-line me-1"></i>Dashboard
+                        </a>
+                        <a href="admin-gallery.html" class="nav-link active" style="margin-bottom: 0;">
+                            <i class="fas fa-images me-1"></i>Gallery
+                        </a>
+                    </div>
+                </div>
+                <div class="col ms-auto">
+                    <div class="d-flex align-items-center justify-content-end gap-3">
+                        <span class="text-white" id="adminUsernameDisplay">Admin</span>
+                        <button id="logoutBtn" class="logout-btn">
+                            <i class="fas fa-sign-out-alt me-2"></i>Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1><i class="fas fa-image me-2"></i>Gallery Management</h1>
+            <p>Upload and manage gallery images and videos for your water purification services</p>
+        </div>
+
+        <!-- Messages -->
+        <div id="alertContainer"></div>
+
+        <!-- Upload Section -->
+        <div class="upload-card">
+            <h3><i class="fas fa-cloud-upload-alt me-2"></i>Upload New Image or Video</h3>
+            
+            <form id="uploadForm" enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="imageTitle" class="form-label">Image Title *</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="imageTitle" 
+                            placeholder="e.g., RO System Installation"
+                            required
+                        >
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="serviceType" class="form-label">Service Type *</label>
+                        <select class="form-select" id="serviceType" required>
+                            <option value="">Select a service type</option>
+                            <option value="Installation">Installation</option>
+                            <option value="Maintenance">Maintenance</option>
+                            <option value="Repair">Repair</option>
+                            <option value="AMC">AMC (Annual Maintenance Contract)</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="category" class="form-label">Category</label>
+                        <select 
+                            class="form-control" 
+                            id="category" 
+                            required
+                        >
+                            <option value="">-- Select Category --</option>
+                            <option value="Domestic RO">Domestic RO</option>
+                            <option value="Industrial RO">Industrial RO</option>
+                            <option value="Water Purifiers">Water Purifiers</option>
+                            <option value="Before-After">Before-After</option>
+                            <option value="Team Work">Team Work</option>
+                            <option value="General">General (Office & Others)</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mb-3">
+                        <label for="tags" class="form-label">Tags (comma-separated)</label>
+                        <input 
+                            type="text" 
+                            class="form-control" 
+                            id="tags" 
+                            placeholder="e.g., kitchen, installation, quality"
+                        >
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="imageDescription" class="form-label">Description</label>
+                    <textarea 
+                        class="form-control" 
+                        id="imageDescription" 
+                        rows="3" 
+                        placeholder="Add a detailed description of the image..."
+                    ></textarea>
+                </div>
+
+                <!-- File Input -->
+                <div class="mb-3">
+                    <label for="imageFile" class="form-label">Select Image or Video *</label>
+                    <div class="file-input-wrapper">
+                        <input 
+                            type="file" 
+                            class="form-control" 
+                            id="imageFile" 
+                            accept="image/*,video/*" 
+                            required
+                        >
+                        <label for="imageFile" class="file-input-label">
+                            <i class="fas fa-upload me-2"></i>Click to select or drag & drop (Images: max 10MB, Videos: max 100MB)
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Image Preview -->
+                <div class="image-preview">
+                    <div class="placeholder-text">
+                        <i class="fas fa-image" style="font-size: 2rem; color: #d1d5db; display: block; margin-bottom: 0.5rem;"></i>
+                        Image or video preview will appear here
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="btn btn-submit" id="submitBtn">
+                    <i class="fas fa-check me-2"></i>Upload Image
+                </button>
+            </form>
+        </div>
+
+        <!-- Gallery Section -->
+        <div class="gallery-grid">
+            <h3><i class="fas fa-th me-2"></i>Uploaded Media</h3>
+            <div id="galleryContainer">
+                <div class="empty-state">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-inbox"></i>
+                    </div>
+                    <p>No images or videos uploaded yet. Start by uploading your first gallery item!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Image Modal -->
+    <div class="modal fade" id="editImageModal" tabindex="-1" aria-labelledby="editImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editImageModalLabel">Edit Image</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editImageId" />
+                        
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="editImageTitle" class="form-label">Image Title *</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="editImageTitle" 
+                                    required
+                                >
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="editServiceType" class="form-label">Service Type *</label>
+                                <select class="form-select" id="editServiceType" required>
+                                    <option value="">Select a service type</option>
+                                    <option value="Installation">Installation</option>
+                                    <option value="Maintenance">Maintenance</option>
+                                    <option value="Repair">Repair</option>
+                                    <option value="AMC">AMC (Annual Maintenance Contract)</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="editCategory" class="form-label">Category</label>
+                                <select 
+                                    class="form-control" 
+                                    id="editCategory" 
+                                    required
+                                >
+                                    <option value="">-- Select Category --</option>
+                                    <option value="Domestic RO">Domestic RO</option>
+                                    <option value="Industrial RO">Industrial RO</option>
+                                    <option value="Water Purifiers">Water Purifiers</option>
+                                    <option value="Before-After">Before-After</option>
+                                    <option value="Team Work">Team Work</option>
+                                    <option value="General">General (Office & Others)</option>
+                                </select>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label for="editTags" class="form-label">Tags (comma-separated)</label>
+                                <input 
+                                    type="text" 
+                                    class="form-control" 
+                                    id="editTags" 
+                                    placeholder="e.g., kitchen, installation, quality"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="editImageDescription" class="form-label">Description</label>
+                            <textarea 
+                                class="form-control" 
+                                id="editImageDescription" 
+                                rows="3" 
+                                placeholder="Add a detailed description of the image..."
+                            ></textarea>
+                        </div>
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="editIsActive" />
+                                <label class="form-check-label" for="editIsActive">
+                                    Publish Image
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="saveEditBtn">Save Changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Check authentication
+        const adminToken = localStorage.getItem('adminToken');
+        const adminUsername = localStorage.getItem('adminUsername');
+
+        if (!adminToken) {
+            window.location.href = 'admin-login.html';
+        } else {
+            document.getElementById('adminUsernameDisplay').textContent = adminUsername || 'Admin';
+        }
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUsername');
+            window.location.href = 'admin-login.html';
+        });
+
+        // Image file input handling
+        const fileInput = document.getElementById('imageFile');
+        const imagePreview = document.querySelector('.image-preview');
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                const isImage = file.type.startsWith('image/');
+                const isVideo = file.type.startsWith('video/');
+                const maxImageSize = 10 * 1024 * 1024; // 10MB for images
+                const maxVideoSize = 100 * 1024 * 1024; // 100MB for videos
+                const maxSize = isVideo ? maxVideoSize : maxImageSize;
+
+                // Validate file size
+                if (file.size > maxSize) {
+                    const maxMB = isVideo ? 100 : 10;
+                    showAlert(`File size must not exceed ${maxMB}MB`, 'danger');
+                    fileInput.value = '';
+                    return;
+                }
+
+                // Validate file type
+                if (!isImage && !isVideo) {
+                    showAlert('Please select a valid image or video file', 'danger');
+                    fileInput.value = '';
+                    return;
+                }
+
+                // Create preview
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    if (isVideo) {
+                        imagePreview.innerHTML = `<video width="100%" height="auto" style="max-height: 300px; border-radius: 8px; background: #000;" controls><source src="${event.target.result}" type="${file.type}">Your browser does not support the video tag.</video><p style="text-align: center; margin-top: 0.5rem; font-size: 0.9rem; color: #6b7280;">Video preview</p>`;
+                    } else {
+                        imagePreview.innerHTML = `<img src="${event.target.result}" alt="Preview">`;
+                    }
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Drag and drop functionality
+        const fileInputLabel = document.querySelector('.file-input-label');
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            fileInputLabel.addEventListener(eventName, preventDefaults, false);
+        });
+
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+
+        ['dragenter', 'dragover'].forEach(eventName => {
+            fileInputLabel.addEventListener(eventName, () => {
+                fileInputLabel.style.background = 'linear-gradient(135deg, #93c5fd 0%, #67e8f9 100%)';
+            });
+        });
+
+        ['dragleave', 'drop'].forEach(eventName => {
+            fileInputLabel.addEventListener(eventName, () => {
+                fileInputLabel.style.background = 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)';
+            });
+        });
+
+        fileInputLabel.addEventListener('drop', (e) => {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            fileInput.files = files;
+            
+            const event = new Event('change', { bubbles: true });
+            fileInput.dispatchEvent(event);
+        });
+
+        // Form submission
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const formData = new FormData();
+            const imageFile = document.getElementById('imageFile').files[0];
+            const title = document.getElementById('imageTitle').value;
+            const description = document.getElementById('imageDescription').value;
+            const serviceType = document.getElementById('serviceType').value;
+            const category = document.getElementById('category').value;
+            const tags = document.getElementById('tags').value;
+
+            if (!imageFile) {
+                showAlert('Please select an image file', 'danger');
+                return;
+            }
+
+            formData.append('image', imageFile);
+            formData.append('title', title);
+            formData.append('description', description);
+            formData.append('serviceType', serviceType);
+            formData.append('category', category);
+            formData.append('tags', tags);
+
+            showLoading(true);
+
+            try {
+                // Upload to backend
+                const response = await fetch('/api/gallery/upload', {
+                    method: 'POST',
+                    headers: {
+                        'x-admin-token': adminToken
+                    },
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Upload failed: ${response.statusText}`);
+                }
+
+                const data = await response.json();
+                showAlert('✓ ' + data.message, 'success');
+
+                // Reset form
+                document.getElementById('uploadForm').reset();
+                imagePreview.innerHTML = `
+                    <div class="placeholder-text">
+                        <i class="fas fa-image" style="font-size: 2rem; color: #d1d5db; display: block; margin-bottom: 0.5rem;"></i>
+                        Image or video preview will appear here
+                    </div>
+                `;
+
+                // Refresh gallery
+                loadGalleryImages();
+            } catch (error) {
+                showAlert('✗ ' + error.message, 'danger');
+            } finally {
+                showLoading(false);
+            }
+        });
+
+        // Save edit form
+        document.getElementById('saveEditBtn').addEventListener('click', async () => {
+            const imageId = document.getElementById('editImageId').value;
+            const title = document.getElementById('editImageTitle').value;
+            const description = document.getElementById('editImageDescription').value;
+            const serviceType = document.getElementById('editServiceType').value;
+            const category = document.getElementById('editCategory').value;
+            const tags = document.getElementById('editTags').value;
+            const isActive = document.getElementById('editIsActive').checked;
+
+            if (!title.trim()) {
+                showAlert('Please enter an image title', 'danger');
+                return;
+            }
+
+            showLoading(true);
+
+            try {
+                const response = await fetch(`/api/gallery/${imageId}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'x-admin-token': adminToken
+                    },
+                    body: JSON.stringify({
+                        title,
+                        description,
+                        serviceType,
+                        category,
+                        tags: tags ? tags.split(',').map(t => t.trim()) : [],
+                        isActive
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Update failed: ${response.statusText}`);
+                }
+
+                showAlert('✓ Image updated successfully!', 'success');
+
+                // Close modal
+                const modal = bootstrap.Modal.getInstance(document.getElementById('editImageModal'));
+                modal.hide();
+
+                // Refresh gallery
+                loadGalleryImages();
+            } catch (error) {
+                showAlert('✗ ' + error.message, 'danger');
+            } finally {
+                showLoading(false);
+            }
+        });
+
+        // Load gallery images
+        async function loadGalleryImages() {
+            try {
+                const response = await fetch('/api/gallery', {
+                    headers: {
+                        'x-admin-token': adminToken
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to load gallery');
+                }
+
+                const result = await response.json();
+                const images = result.data || result;
+                displayGalleryImages(images);
+            } catch (error) {
+                console.error('Error loading gallery:', error);
+                // In demo mode, show empty gallery
+                document.getElementById('galleryContainer').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <p>No images or videos uploaded yet. Start by uploading your first gallery item!</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Display gallery images and videos
+        function displayGalleryImages(images) {
+            const container = document.getElementById('galleryContainer');
+
+            if (images.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <p>No images or videos uploaded yet. Start by uploading your first item!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = `
+                <div class="row">
+                    ${images.map(item => {
+                        // Determine if it's a video by checking mediaType or file extension
+                        const isVideo = item.mediaType === 'video' || (item.imageUrl && (item.imageUrl.endsWith('.mp4') || item.imageUrl.endsWith('.webm') || item.imageUrl.endsWith('.mov') || item.imageUrl.endsWith('.avi')));
+                        
+                        return `
+                        <div class="col-md-6 col-lg-4">
+                            <div class="gallery-item-card">
+                                ${isVideo ? `
+                                    <div style="width: 100%; position: relative; background: #000; border-radius: 10px 10px 0 0; overflow: hidden;">
+                                        <video width="100%" height="200" style="object-fit: cover; display: block;" controls>
+                                            <source src="${item.imageUrl}" type="video/mp4">
+                                            Your browser does not support the video tag.
+                                        </video>
+                                        <div style="position: absolute; top: 10px; right: 10px; background: #ef4444; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; z-index: 10;">VIDEO</div>
+                                    </div>
+                                ` : `
+                                    <img src="${item.imageUrl || '/assets/placeholder.jpg'}" alt="${item.title}" class="gallery-item-image" onerror="this.src='/assets/placeholder.jpg'">
+                                `}
+                                <div class="gallery-item-content">
+                                    <div class="gallery-item-title">${item.title}</div>
+                                    <div class="gallery-item-meta">
+                                        <span><strong>Service:</strong> ${item.serviceType}</span>
+                                    </div>
+                                    ${item.category ? `<div class="gallery-item-meta"><strong>Category:</strong> ${item.category}</div>` : ''}
+                                    <p class="text-muted small">${item.description ? item.description.substring(0, 60) + '...' : 'No description'}</p>
+                                    <div class="gallery-item-actions">
+                                        <button class="btn btn-sm btn-edit" onclick="editImage('${item._id}')">
+                                            <i class="fas fa-edit me-1"></i>Edit
+                                        </button>
+                                        <button class="btn btn-sm btn-delete" onclick="deleteImage('${item._id}', this)">
+                                            <i class="fas fa-trash me-1"></i>Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        // Edit image
+        async function editImage(imageId) {
+            showLoading(true);
+
+            try {
+                const response = await fetch(`/api/gallery/${imageId}?edit=true`, {
+                    headers: {
+                        'x-admin-token': adminToken
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to load image details');
+                }
+
+                const result = await response.json();
+                const image = result.data || result;
+
+                // Populate form with image data
+                document.getElementById('editImageId').value = image._id;
+                document.getElementById('editImageTitle').value = image.title || '';
+                document.getElementById('editServiceType').value = image.serviceType || 'Other';
+                document.getElementById('editCategory').value = image.category || 'General';
+                document.getElementById('editImageDescription').value = image.description || '';
+                document.getElementById('editTags').value = image.tags ? image.tags.join(', ') : '';
+                document.getElementById('editIsActive').checked = image.isActive !== false;
+
+                // Show modal
+                const modal = new bootstrap.Modal(document.getElementById('editImageModal'));
+                modal.show();
+
+            } catch (error) {
+                showAlert('✗ ' + error.message, 'danger');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Delete image
+        async function deleteImage(imageId, button) {
+            if (!confirm('Are you sure you want to delete this image?')) {
+                return;
+            }
+
+            showLoading(true);
+
+            try {
+                const response = await fetch(`/api/gallery/${imageId}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'x-admin-token': adminToken
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to delete image');
+                }
+
+                showAlert('✓ Image deleted successfully!', 'success');
+                loadGalleryImages();
+            } catch (error) {
+                showAlert('✗ ' + error.message, 'danger');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        // Show alert message
+        function showAlert(message, type = 'info') {
+            const container = document.getElementById('alertContainer');
+            const id = 'alert-' + Date.now();
+            const alertHTML = `
+                <div class="alert alert-message alert-${type === 'danger' ? 'danger' : type === 'success' ? 'success' : 'info'} alert-dismissible fade show" id="${id}" role="alert">
+                    ${message}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                </div>
+            `;
+
+            container.insertAdjacentHTML('beforeend', alertHTML);
+
+            // Auto dismiss after 5 seconds
+            setTimeout(() => {
+                const alert = document.getElementById(id);
+                if (alert) {
+                    const bsAlert = new bootstrap.Alert(alert);
+                    bsAlert.close();
+                }
+            }, 5000);
+        }
+
+        // Show/hide loading overlay
+        function showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            if (show) {
+                overlay.classList.add('show');
+            } else {
+                overlay.classList.remove('show');
+            }
+        }
+
+        // Load gallery on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            loadGalleryImages();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - AQUA PURE SYSTEM</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #f3f4f6;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .admin-navbar {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .admin-navbar .navbar-brand {
+            color: white;
+            font-weight: 700;
+            font-size: 1.3rem;
+        }
+
+        .admin-navbar .nav-link {
+            color: rgba(255, 255, 255, 0.8);
+            transition: color 0.3s ease;
+            margin: 0 0.5rem;
+        }
+
+        .admin-navbar .nav-link:hover {
+            color: white;
+        }
+
+        .admin-navbar .nav-link.active {
+            color: white;
+            border-bottom: 2px solid white;
+            padding-bottom: 0.5rem;
+        }
+
+        .admin-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+
+        .page-header h1 {
+            color: #1f2937;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-header p {
+            color: #6b7280;
+            margin: 0;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            text-align: center;
+        }
+
+        .stat-card .stat-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-card.enquiries .stat-icon {
+            color: #3b82f6;
+        }
+
+        .stat-card.reviews .stat-icon {
+            color: #f59e0b;
+        }
+
+        .stat-card .stat-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #1f2937;
+            margin: 0.5rem 0;
+        }
+
+        .stat-card .stat-label {
+            color: #6b7280;
+            font-size: 0.9rem;
+        }
+
+        .content-card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e5e7eb;
+            margin-bottom: 2rem;
+        }
+
+        .card-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid #e5e7eb;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card-header h2 {
+            color: #1f2937;
+            font-weight: 600;
+            margin: 0;
+            font-size: 1.25rem;
+        }
+
+        .card-header .controls {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-box {
+            position: relative;
+            width: 300px;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .filter-select {
+            padding: 0.5rem 1rem;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: white;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .card-body {
+            padding: 1.5rem;
+            overflow-x: auto;
+        }
+
+        .table {
+            margin: 0;
+            font-size: 0.95rem;
+        }
+
+        .table thead th {
+            background-color: #f9fafb;
+            color: #374151;
+            font-weight: 600;
+            border-color: #e5e7eb;
+            padding: 1rem;
+        }
+
+        .table tbody td {
+            padding: 1rem;
+            border-color: #e5e7eb;
+            vertical-align: middle;
+        }
+
+        .table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-new {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .status-contacted {
+            background-color: #fcd34d;
+            color: #78350f;
+        }
+
+        .status-completed {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .status-closed {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .rating-stars {
+            color: #f59e0b;
+            font-size: 0.9rem;
+        }
+
+        .service-badge {
+            display: inline-block;
+            padding: 0.35rem 0.75rem;
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn-sm {
+            padding: 0.35rem 0.75rem;
+            font-size: 0.85rem;
+            border-radius: 6px;
+            font-weight: 500;
+        }
+
+        .btn-view {
+            background-color: #e0f2fe;
+            color: #0369a1;
+            border: none;
+        }
+
+        .btn-view:hover {
+            background-color: #cffafe;
+            color: #0369a1;
+            text-decoration: none;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            color: #d1d5db;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state p {
+            color: #6b7280;
+            font-size: 1rem;
+            margin: 0;
+        }
+
+        .modal-body {
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+
+        .modal-header {
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            border: none;
+        }
+
+        .modal-header .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        .modal-title {
+            color: white !important;
+        }
+
+        .detail-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-label {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value {
+            color: #1f2937;
+            font-size: 1rem;
+            word-break: break-word;
+            padding: 0.75rem;
+            background-color: #f9fafb;
+            border-radius: 6px;
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .loading-overlay.show {
+            display: flex;
+        }
+
+        .alert {
+            border-radius: 10px;
+            border: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .alert-danger {
+            background-color: #fee2e2;
+            color: #991b1b;
+        }
+
+        .alert-success {
+            background-color: #dcfce7;
+            color: #166534;
+        }
+
+        .alert-info {
+            background-color: #dbeafe;
+            color: #1e40af;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .nav-tabs .nav-link {
+            color: #6b7280;
+            border: none;
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+
+        .admin-navbar .nav-tabs .nav-link {
+            color: rgba(255, 255, 255, 0.85);
+            border-bottom: 2px solid transparent;
+            font-weight: 500;
+        }
+
+        .admin-navbar .nav-tabs .nav-link:hover {
+            color: white;
+        }
+
+        .admin-navbar .nav-tabs .nav-link.active {
+            color: white;
+            border-bottom-color: white;
+        }
+
+        .nav-tabs .nav-link:hover {
+            color: #1f2937;
+        }
+
+        .nav-tabs .nav-link.active {
+            color: #3b82f6;
+            border-bottom-color: #3b82f6;
+            background: none;
+        }
+
+        @media (max-width: 768px) {
+            .admin-container {
+                padding: 1rem;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .card-header {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+
+            .card-header .controls {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .search-box {
+                width: 100%;
+            }
+
+            .card-body {
+                padding: 1rem;
+                font-size: 0.85rem;
+            }
+
+            .table thead th,
+            .table tbody td {
+                padding: 0.75rem 0.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-sm {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Admin Navigation -->
+    <nav class="admin-navbar">
+        <div class="container-fluid">
+            <div class="row w-100 align-items-center">
+                <div class="col-auto">
+                    <span class="navbar-brand">
+                        <i class="fas fa-chart-line me-2"></i>Admin Dashboard
+                    </span>
+                </div>
+                <div class="col ms-auto">
+                    <div class="nav nav-tabs" role="tablist">
+                        <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard-content" role="tab">
+                            <i class="fas fa-th-large me-2"></i>Dashboard
+                        </a>
+                        <a class="nav-link" id="gallery-tab" href="admin-gallery.html">
+                            <i class="fas fa-images me-2"></i>Gallery
+                        </a>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="d-flex align-items-center justify-content-end gap-3">
+                        <span class="text-white" id="adminUsernameDisplay" style="font-size: 0.95rem;">Admin</span>
+                        <button id="logoutBtn" class="btn btn-sm" style="background-color: rgba(255, 255, 255, 0.2); color: white; border: none;">
+                            <i class="fas fa-sign-out-alt me-1"></i>Logout
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="admin-container">
+        <!-- Page Header -->
+        <div class="page-header">
+            <h1><i class="fas fa-tachometer-alt me-2"></i>Dashboard</h1>
+            <p>View and manage customer enquiries and reviews</p>
+        </div>
+
+        <!-- Alert Messages -->
+        <div id="alertContainer"></div>
+
+        <!-- Statistics -->
+        <div class="stats-grid">
+            <div class="stat-card enquiries">
+                <div class="stat-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <div class="stat-number" id="totalEnquiries">0</div>
+                <div class="stat-label">Total Enquiries</div>
+            </div>
+
+            <div class="stat-card enquiries" style="border-left: 4px solid #3b82f6;">
+                <div class="stat-icon">
+                    <i class="fas fa-star"></i>
+                </div>
+                <div class="stat-number" id="newEnquiries">0</div>
+                <div class="stat-label">New Enquiries</div>
+            </div>
+
+            <div class="stat-card reviews">
+                <div class="stat-icon">
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                <div class="stat-number" id="totalReviews">0</div>
+                <div class="stat-label">Total Reviews</div>
+            </div>
+
+            <div class="stat-card reviews" style="border-left: 4px solid #f59e0b;">
+                <div class="stat-icon">
+                    <i class="fas fa-star-half-alt"></i>
+                </div>
+                <div class="stat-value" id="averageRating" style="font-size: 2.5rem; color: #1f2937; margin: 0; font-weight: 700;">0</div>
+                <div class="stat-label">Avg Rating</div>
+            </div>
+        </div>
+
+        <!-- Enquiries Section -->
+        <div class="content-card">
+            <div class="card-header">
+                <h2><i class="fas fa-envelope me-2"></i>Customer Enquiries</h2>
+                <div class="controls">
+                    <div class="search-box">
+                        <input type="text" id="enquirySearch" placeholder="Search by name, phone, service..." />
+                    </div>
+                    <select class="filter-select" id="enquiryStatusFilter">
+                        <option value="">All Status</option>
+                        <option value="new">New</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="completed">Completed</option>
+                        <option value="closed">Closed</option>
+                    </select>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="enquiriesContainer">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <p>Loading enquiries...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="content-card">
+            <div class="card-header">
+                <h2><i class="fas fa-comment-dots me-2"></i>Customer Reviews</h2>
+                <div class="controls">
+                    <div class="search-box">
+                        <input type="text" id="reviewSearch" placeholder="Search by customer name..." />
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div id="reviewsContainer">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <p>Loading reviews...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Enquiry Details Modal -->
+    <div class="modal fade" id="enquiryModal" tabindex="-1" aria-labelledby="enquiryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="enquiryModalLabel">Enquiry Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="enquiryModalBody">
+                    <!-- Details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Details Modal -->
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="reviewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reviewModalLabel">Review Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="reviewModalBody">
+                    <!-- Details will be populated here -->
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // ==========================================
+        // AUTHENTICATION CHECK
+        // ==========================================
+        const adminToken = localStorage.getItem('adminToken');
+        const adminUsername = localStorage.getItem('adminUsername');
+
+        if (!adminToken) {
+            window.location.href = 'admin-login.html';
+        } else {
+            document.getElementById('adminUsernameDisplay').textContent = adminUsername || 'Admin';
+        }
+
+        // Logout functionality
+        document.getElementById('logoutBtn').addEventListener('click', () => {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminUsername');
+            window.location.href = 'admin-login.html';
+        });
+
+        // ==========================================
+        // ALERT DISPLAY FUNCTION
+        // ==========================================
+        function showAlert(message, type = 'info') {
+            const alertContainer = document.getElementById('alertContainer');
+            const alertDiv = document.createElement('div');
+            alertDiv.className = `alert alert-${type} alert-dismissible fade show`;
+            alertDiv.innerHTML = `
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            `;
+            alertContainer.appendChild(alertDiv);
+            setTimeout(() => {
+                alertDiv.remove();
+            }, 5000);
+        }
+
+        // ==========================================
+        // LOAD ENQUIRIES
+        // ==========================================
+        async function loadEnquiries() {
+            try {
+                const response = await fetch('/api/enquiry', {
+                    headers: {
+                        'x-admin-token': adminToken
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401 || response.status === 403) {
+                        localStorage.removeItem('adminToken');
+                        window.location.href = 'admin-login.html';
+                        return;
+                    }
+                    throw new Error('Failed to load enquiries');
+                }
+
+                const enquiries = await response.json();
+                displayEnquiries(enquiries.data || enquiries || []);
+                updateEnquiriesStats(enquiries.data || enquiries || []);
+            } catch (error) {
+                console.error('Error loading enquiries:', error);
+                showAlert('Failed to load enquiries: ' + error.message, 'danger');
+                document.getElementById('enquiriesContainer').innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        Error loading enquiries. Please try refreshing the page.
+                    </div>
+                `;
+            }
+        }
+
+        // ==========================================
+        // DISPLAY ENQUIRIES
+        // ==========================================
+        function displayEnquiries(enquiries) {
+            const container = document.getElementById('enquiriesContainer');
+
+            if (!enquiries || enquiries.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <p>No enquiries yet. Check back soon!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Phone</th>
+                            <th>Service</th>
+                            <th>Status</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            enquiries.forEach(enquiry => {
+                const statusClass = `status-${enquiry.status || 'new'}`;
+                const date = new Date(enquiry.createdAt).toLocaleDateString('en-IN');
+                html += `
+                    <tr>
+                        <td>${enquiry.name}</td>
+                        <td>${enquiry.phone}</td>
+                        <td><span class="service-badge">${enquiry.service}</span></td>
+                        <td><span class="status-badge ${statusClass}">${enquiry.status || 'new'}</span></td>
+                        <td>${date}</td>
+                        <td>
+                            <button class="btn btn-sm btn-view" onclick="viewEnquiryDetails('${enquiry._id}')">
+                                <i class="fas fa-eye me-1"></i>View
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // ==========================================
+        // UPDATE ENQUIRIES STATS
+        // ==========================================
+        function updateEnquiriesStats(enquiries) {
+            document.getElementById('totalEnquiries').textContent = enquiries.length;
+            const newCount = enquiries.filter(e => e.status === 'new').length;
+            document.getElementById('newEnquiries').textContent = newCount;
+        }
+
+        // ==========================================
+        // VIEW ENQUIRY DETAILS
+        // ==========================================
+        function viewEnquiryDetails(enquiryId) {
+            // Fetch detailed enquiry information
+            fetch(`/api/enquiry/${enquiryId}`, {
+                headers: {
+                    'x-admin-token': adminToken
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                const enquiry = data.data || data;
+                const date = new Date(enquiry.createdAt).toLocaleString('en-IN');
+                const html = `
+                    <div class="detail-group">
+                        <div class="detail-label">Name</div>
+                        <div class="detail-value">${enquiry.name}</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Phone</div>
+                        <div class="detail-value">
+                            <a href="tel:${enquiry.phone}" style="color: #3b82f6; text-decoration: none;">
+                                ${enquiry.phone}
+                            </a>
+                        </div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value">${enquiry.email || 'Not provided'}</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Service Type</div>
+                        <div class="detail-value">${enquiry.service}</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Message</div>
+                        <div class="detail-value">${enquiry.message}</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Status</div>
+                        <div class="detail-value"><span class="status-badge status-${enquiry.status || 'new'}">${enquiry.status || 'new'}</span></div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Submitted On</div>
+                        <div class="detail-value">${date}</div>
+                    </div>
+                `;
+                document.getElementById('enquiryModalBody').innerHTML = html;
+                new bootstrap.Modal(document.getElementById('enquiryModal')).show();
+            })
+            .catch(error => {
+                console.error('Error fetching enquiry details:', error);
+                showAlert('Failed to load enquiry details', 'danger');
+            });
+        }
+
+        // ==========================================
+        // LOAD REVIEWS
+        // ==========================================
+        async function loadReviews() {
+            try {
+                const response = await fetch('/api/reviews/admin/all', {
+                    headers: {
+                        'x-admin-token': adminToken
+                    }
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401 || response.status === 403) {
+                        localStorage.removeItem('adminToken');
+                        window.location.href = 'admin-login.html';
+                        return;
+                    }
+                    throw new Error('Failed to load reviews');
+                }
+
+                const reviews = await response.json();
+                displayReviews(reviews.data || reviews || []);
+                updateReviewsStats(reviews.data || reviews || []);
+            } catch (error) {
+                console.error('Error loading reviews:', error);
+                showAlert('Failed to load reviews: ' + error.message, 'danger');
+                document.getElementById('reviewsContainer').innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        Error loading reviews. Please try refreshing the page.
+                    </div>
+                `;
+            }
+        }
+
+        // ==========================================
+        // DISPLAY REVIEWS
+        // ==========================================
+        function displayReviews(reviews) {
+            const container = document.getElementById('reviewsContainer');
+
+            if (!reviews || reviews.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-state-icon">
+                            <i class="fas fa-inbox"></i>
+                        </div>
+                        <p>No reviews yet. Check back soon!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            let html = `
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Customer Name</th>
+                            <th>Service Type</th>
+                            <th>Rating</th>
+                            <th>Comment</th>
+                            <th>Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+            reviews.forEach(review => {
+                const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                const date = new Date(review.createdAt).toLocaleDateString('en-IN');
+                const commentPreview = review.comment.substring(0, 50) + (review.comment.length > 50 ? '...' : '');
+
+                html += `
+                    <tr>
+                        <td>${review.name}</td>
+                        <td><span class="service-badge">${review.serviceType || 'Other'}</span></td>
+                        <td><span class="rating-stars">${stars}</span></td>
+                        <td>${commentPreview}</td>
+                        <td>${date}</td>
+                        <td>
+                            <button class="btn btn-sm btn-view" onclick="viewReviewDetails('${review._id}')">
+                                <i class="fas fa-eye me-1"></i>View
+                            </button>
+                        </td>
+                    </tr>
+                `;
+            });
+
+            html += `
+                    </tbody>
+                </table>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // ==========================================
+        // UPDATE REVIEWS STATS
+        // ==========================================
+        function updateReviewsStats(reviews) {
+            document.getElementById('totalReviews').textContent = reviews.length;
+            if (reviews.length > 0) {
+                const avgRating = (reviews.reduce((sum, r) => sum + (r.rating || 0), 0) / reviews.length).toFixed(1);
+                document.getElementById('averageRating').textContent = avgRating;
+            }
+        }
+
+        // ==========================================
+        // VIEW REVIEW DETAILS
+        // ==========================================
+        function viewReviewDetails(reviewId) {
+            fetch(`/api/reviews/${reviewId}`, {
+                headers: {
+                    'x-admin-token': adminToken
+                }
+            })
+            .then(res => res.json())
+            .then(data => {
+                const review = data.data || data;
+                const date = new Date(review.createdAt).toLocaleString('en-IN');
+                const stars = '★'.repeat(review.rating) + '☆'.repeat(5 - review.rating);
+                
+                const html = `
+                    <div class="detail-group">
+                        <div class="detail-label">Customer Name</div>
+                        <div class="detail-value">${review.name}</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Email</div>
+                        <div class="detail-value">${review.email || 'Not provided'}</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Service Type</div>
+                        <div class="detail-value">${review.serviceType || 'Other'}</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Rating</div>
+                        <div class="detail-value"><span class="rating-stars">${stars}</span> (${review.rating}/5)</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Review Comment</div>
+                        <div class="detail-value">${review.comment}</div>
+                    </div>
+                    <div class="detail-group">
+                        <div class="detail-label">Submitted On</div>
+                        <div class="detail-value">${date}</div>
+                    </div>
+                `;
+                document.getElementById('reviewModalBody').innerHTML = html;
+                new bootstrap.Modal(document.getElementById('reviewModal')).show();
+            })
+            .catch(error => {
+                console.error('Error fetching review details:', error);
+                showAlert('Failed to load review details', 'danger');
+            });
+        }
+
+        // ==========================================
+        // SEARCH AND FILTER FUNCTIONALITY
+        // ==========================================
+        let allEnquiries = [];
+        let allReviews = [];
+
+        document.getElementById('enquirySearch').addEventListener('input', filterEnquiries);
+        document.getElementById('enquiryStatusFilter').addEventListener('change', filterEnquiries);
+        document.getElementById('reviewSearch').addEventListener('input', filterReviews);
+
+        function filterEnquiries() {
+            const searchTerm = document.getElementById('enquirySearch').value.toLowerCase();
+            const statusFilter = document.getElementById('enquiryStatusFilter').value;
+
+            const filtered = allEnquiries.filter(enquiry => {
+                const matchesSearch = enquiry.name.toLowerCase().includes(searchTerm) ||
+                                     enquiry.phone.includes(searchTerm) ||
+                                     enquiry.service.toLowerCase().includes(searchTerm);
+                const matchesStatus = !statusFilter || enquiry.status === statusFilter;
+                return matchesSearch && matchesStatus;
+            });
+
+            displayEnquiries(filtered);
+        }
+
+        function filterReviews() {
+            const searchTerm = document.getElementById('reviewSearch').value.toLowerCase();
+
+            const filtered = allReviews.filter(review => {
+                return review.name.toLowerCase().includes(searchTerm) ||
+                       (review.email && review.email.toLowerCase().includes(searchTerm));
+            });
+
+            displayReviews(filtered);
+        }
+
+        // ==========================================
+        // INITIALIZE DASHBOARD
+        // ==========================================
+        async function initializeDashboard() {
+            document.getElementById('loadingOverlay').classList.add('show');
+
+            try {
+                // Load enquiries
+                const enquiriesResponse = await fetch('/api/enquiry', {
+                    headers: {
+                        'x-admin-token': adminToken
+                    }
+                });
+
+                if (enquiriesResponse.ok) {
+                    const enquiriesData = await enquiriesResponse.json();
+                    allEnquiries = enquiriesData.data || enquiriesData || [];
+                    displayEnquiries(allEnquiries);
+                    updateEnquiriesStats(allEnquiries);
+                }
+
+                // Load reviews
+                const reviewsResponse = await fetch('/api/reviews/admin/all', {
+                    headers: {
+                        'x-admin-token': adminToken
+                    }
+                });
+
+                if (reviewsResponse.ok) {
+                    const reviewsData = await reviewsResponse.json();
+                    allReviews = reviewsData.data || reviewsData || [];
+                    displayReviews(allReviews);
+                    updateReviewsStats(allReviews);
+                }
+            } catch (error) {
+                console.error('Error initializing dashboard:', error);
+                showAlert('Error loading dashboard data', 'danger');
+            } finally {
+                document.getElementById('loadingOverlay').classList.remove('show');
+            }
+        }
+
+        // Load dashboard on page load
+        document.addEventListener('DOMContentLoaded', initializeDashboard);
+    </script>
+</body>
+</html>

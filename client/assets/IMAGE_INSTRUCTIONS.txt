@@ -1,0 +1,38 @@
+AQUA PURE SYSTEM - Image Assets Required
+==========================================
+
+IMPORTANT: The website expects these 3 images. Add them to this folder (/client/assets/):
+
+1. logo.png
+   - Size: 40px height (auto width)
+   - Format: PNG (transparent background preferred)
+   - Purpose: Company logo in navbar
+   - Description: Your AQUA PURE SYSTEM logo
+
+2. hero-image.jpg
+   - Size: 500px × 450px (minimum)
+   - Format: JPG/PNG
+   - Purpose: Featured image on homepage
+   - Description: Water purifier/RO system product photo
+
+3. founder.jpg
+   - Size: 300px × 400px (portrait)
+   - Format: JPG/PNG  
+   - Purpose: Founder/owner profile photo
+   - Description: Professional headshot of SIVARAMAN K
+
+====================================================
+
+HOW TO ADD IMAGES:
+1. Copy/paste your image files into this folder (/client/assets/)
+2. Make sure filenames match exactly: logo.png, hero-image.jpg, founder.jpg
+3. Refresh your browser (Ctrl+F5)
+4. Images will automatically display
+
+If images still don't show:
+- Check file names (case-sensitive)
+- Verify file format matches (.png, .jpg)
+- Ensure images are in this /assets/ folder
+- Check browser console for errors (F12)
+
+====================================================

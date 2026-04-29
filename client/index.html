@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AQUA PURE SYSTEM - Water Filter Installation & Maintenance Services</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- NAVBAR / HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                <!-- Logo: Actual logo image -->
+                <img src="assets/images/logo.jpeg" alt="AQUA PURE SYSTEM Logo" style="height: 85px; width: auto; object-fit: contain;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <a href="#enquiry-section" class="btn btn-primary ms-3">Get Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero-section py-5" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); position: relative; overflow: hidden;">
+        <!-- Wave Background -->
+        <div class="wave-bg" style="position: absolute; bottom: 0; left: 0; width: 100%; height: 100px; background: url('data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 1200 120%22><path d=%22M0,20 Q300,50 600,20 T1200,20 L1200,120 L0,120 Z%22 fill=%22rgba(255,255,255,0.1)%22/></svg>') repeat-x; opacity: 0.5;"></div>
+
+        <div class="container position-relative z-1 pt-5">
+            <div class="row align-items-center">
+                <!-- Left Side - Text -->
+                <div class="col-lg-6 text-white mb-5 mb-lg-0 fade-in-animation">
+                    <p class="small fw-bold text-uppercase letter-spacing text-white">Welcome to</p>
+                    <h1 class="display-4 fw-bold mb-3">AQUA PURE SYSTEM</h1>
+                    <p class="lead mb-3">Trusted Water Filter Installation & Maintenance Service</p>
+                    <p class="text-white-75 mb-4">Ensuring Safe & Pure Drinking Water for Every Home</p>
+                    
+                    <!-- Feature Bullets -->
+                    <div class="mb-5">
+                        <p class="mb-2 text-white"><i class="fas fa-check circle-check"></i> Quality Products</p>
+                        <p class="mb-2 text-white"><i class="fas fa-check circle-check"></i> Expert Service</p>
+                        <p class="mb-2 text-white"><i class="fas fa-check circle-check"></i> 100% Satisfaction</p>
+                    </div>
+                    
+                    <!-- CTA Buttons -->
+                    <div class="d-flex gap-3 flex-wrap">
+                        <a href="services.html" class="btn btn-light btn-lg fw-bold rounded-pill shadow">Our Services</a>
+                        <a href="contact.html" class="btn btn-outline-light btn-lg fw-bold rounded-pill">Contact Us</a>
+                    </div>
+                </div>
+
+                <!-- Right Side - Image Placeholder -->
+                <div class="col-lg-6 fade-in-animation" style="animation-delay: 0.1s;">
+                    <div id="heroImageContainer" class="rounded-4 shadow-lg overflow-hidden" style="background: white;">
+                        <!-- Hero image from assets -->
+                        <img 
+                            src="assets/images/hero image.jpg" 
+                            alt="AQUA PURE Water Purifier System" 
+                            class="w-100" 
+                            style="height: 450px; object-fit: cover; display: block;"
+                            id="heroImage"
+                        >
+                    </div>
+                    <script>
+                        // Handle hero image fallback
+                        document.getElementById('heroImage').onerror = function() {
+                            document.getElementById('heroImageContainer').innerHTML = `
+                                <div class="text-center p-5 bg-white" style="height: 450px; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <i class="fas fa-water" style="font-size: 100px; color: #3b82f6; margin-bottom: 1rem;"></i>
+                                    <p class="text-muted fw-bold">Water Purifier Image</p>
+                                </div>
+                            `;
+                        };
+                    </script>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ABOUT FOUNDER SECTION -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center gap-5">
+                <!-- Left - Founder Photo -->
+                <div class="col-lg-5 fade-in-on-scroll">
+                    <div id="founderImageContainer" class="rounded-4 shadow-lg overflow-hidden" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); min-height: 400px;">
+                        <!-- Founder photo from assets -->
+                        <img 
+                            src="assets/images/founder.jpeg" 
+                            alt="Sivaraman K - Founder of AQUA PURE SYSTEM" 
+                            class="w-100 h-100" 
+                            style="object-fit: cover; display: block;"
+                            id="founderImage"
+                        >
+                    </div>
+                    <script>
+                        // Handle founder image fallback
+                        document.getElementById('founderImage').onerror = function() {
+                            document.getElementById('founderImageContainer').innerHTML = `
+                                <div style="height: 400px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 2rem; text-align: center;">
+                                    <i class="fas fa-user-circle" style="font-size: 140px; color: #3b82f6; margin-bottom: 1rem;"></i>
+                                    <p class="fw-bold text-primary">SIVARAMAN K</p>
+                                    <p class="small text-muted">Founder Photo</p>
+                                </div>
+                            `;
+                        };
+                    </script>
+                </div>
+
+                <!-- Right - Founder Info -->
+                <div class="col-lg-7 fade-in-on-scroll" style="animation-delay: 0.1s;">
+                    <h2 class="fw-bold mb-2">SIVARAMAN K</h2>
+                    <div class="badge bg-primary fs-6 mb-4"><i class="fas fa-star me-2"></i>22+ Years Experience</div>
+                    <p class="text-muted mb-3">Diploma in Instrumentation and Control Engineering</p>
+                    
+                    <p class="lh-lg text-dark">
+                        Founded by SIVARAMAN K, AQUA PURE SYSTEM is built on strong technical experience and dedication to quality service. With over 22+ years of hands-on experience in water purifier installation, maintenance, and repair since 2004, the focus has always been on providing reliable and long-lasting water purification solutions for every customer.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES HIGHLIGHT SECTION -->
+    <section class="py-5">
+        <div class="container">
+            <div class="text-center mb-5 fade-in-on-scroll">
+                <h2 class="fw-bold">Our Key Services</h2>
+                <p class="text-muted">Professional water purification solutions for residential and commercial needs</p>
+            </div>
+
+            <div class="row g-4">
+                <!-- Service 1: Installation -->
+                <div class="col-md-6 col-lg-3 fade-in-on-scroll">
+                    <div class="service-card p-4 rounded-4 shadow-sm h-100 text-center service-card-hover">
+                        <div class="service-icon mb-3">
+                            <i class="fas fa-tools" style="font-size: 50px; color: #3b82f6;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Installation</h5>
+                        <p class="text-muted small">Professional setup and testing of water purification systems</p>
+                    </div>
+                </div>
+
+                <!-- Service 2: Maintenance -->
+                <div class="col-md-6 col-lg-3 fade-in-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="service-card p-4 rounded-4 shadow-sm h-100 text-center service-card-hover">
+                        <div class="service-icon mb-3">
+                            <i class="fas fa-wrench" style="font-size: 50px; color: #3b82f6;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Maintenance</h5>
+                        <p class="text-muted small">Regular filter replacement and system servicing</p>
+                    </div>
+                </div>
+
+                <!-- Service 3: Repair -->
+                <div class="col-md-6 col-lg-3 fade-in-on-scroll" style="animation-delay: 0.2s;">
+                    <div class="service-card p-4 rounded-4 shadow-sm h-100 text-center service-card-hover">
+                        <div class="service-icon mb-3">
+                            <i class="fas fa-hammer" style="font-size: 50px; color: #3b82f6;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">Repair & Replacement</h5>
+                        <p class="text-muted small">Quick fault diagnosis and component replacement</p>
+                    </div>
+                </div>
+
+                <!-- Service 4: AMC -->
+                <div class="col-md-6 col-lg-3 fade-in-on-scroll" style="animation-delay: 0.3s;">
+                    <div class="service-card p-4 rounded-4 shadow-sm h-100 text-center service-card-hover">
+                        <div class="service-icon mb-3">
+                            <i class="fas fa-calendar-check" style="font-size: 50px; color: #3b82f6;"></i>
+                        </div>
+                        <h5 class="fw-bold mb-2">AMC</h5>
+                        <p class="text-muted small">Comprehensive annual maintenance contracts</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-5 fade-in-on-scroll">
+                <a href="services.html" class="btn btn-primary btn-lg">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY PREVIEW SECTION -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <div class="text-center mb-5 fade-in-on-scroll">
+                <h2 class="fw-bold">Gallery - Our Recent Work</h2>
+                <p class="text-muted">Real images of our completed water filter installations and maintenance work</p>
+            </div>
+
+            <div id="homeGalleryContainer" class="row g-4 mb-5">
+                <!-- Gallery items will be loaded here by JavaScript -->
+            </div>
+
+            <div class="text-center fade-in-on-scroll">
+                <a href="gallery.html" class="btn btn-primary btn-lg">View Full Gallery</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ENQUIRY FORM SECTION -->
+    <section class="py-5" id="enquiry-section">
+        <div class="container">
+            <div class="text-center mb-5 fade-in-on-scroll">
+                <h2 class="fw-bold">Quick Enquiry</h2>
+                <p class="text-muted">Tell us about your water purification needs</p>
+            </div>
+
+            <div class="row g-5">
+                <!-- Enquiry Form -->
+                <div class="col-lg-6 fade-in-on-scroll">
+                    <div class="card rounded-4 shadow-sm p-5">
+                        <form id="enquiryForm">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Your Name</label>
+                                <input type="text" class="form-control form-control-lg rounded-3" id="name" placeholder="Enter your name" required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Phone Number</label>
+                                <input type="tel" class="form-control form-control-lg rounded-3" id="phone" placeholder="Enter your phone number" required>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Service Needed</label>
+                                <select class="form-select form-select-lg rounded-3" id="service" required>
+                                    <option value="">-- Select Service --</option>
+                                    <option value="Installation">Installation</option>
+                                    <option value="Maintenance">Maintenance</option>
+                                    <option value="Repair & Replacement">Repair & Replacement</option>
+                                    <option value="AMC">AMC (Annual Maintenance Contract)</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Message</label>
+                                <textarea class="form-control rounded-3" id="message" rows="4" placeholder="Tell us more about your needs..." required></textarea>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg w-100 rounded-3 fw-bold">Send Enquiry</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Contact Info Card -->
+                <div class="col-lg-6 fade-in-on-scroll" style="animation-delay: 0.1s;">
+                    <div class="card rounded-4 shadow-sm p-5 h-100">
+                        <h5 class="fw-bold mb-4">Contact Information</h5>
+
+                        <div class="mb-4 d-flex gap-3">
+                            <div style="font-size: 24px; color: #3b82f6;"><i class="fas fa-phone"></i></div>
+                            <div>
+                                <p class="small text-muted mb-1">Phone Numbers</p>
+                                <p class="fw-bold">9962647678 / 9677006923</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-4 d-flex gap-3">
+                            <div style="font-size: 24px; color: #3b82f6;"><i class="fas fa-envelope"></i></div>
+                            <div>
+                                <p class="small text-muted mb-1">Email</p>
+                                <p class="fw-bold">meenakshishivaraman@gmail.com</p>
+                            </div>
+                        </div>
+
+                        <div class="mb-5 d-flex gap-3">
+                            <div style="font-size: 24px; color: #3b82f6;"><i class="fas fa-map-marker-alt"></i></div>
+                            <div>
+                                <p class="small text-muted mb-1">Location</p>
+                                <p class="fw-bold">No.8, RANI GOPAL COMPLEX, RANIJI NAGAR, MADANANDHAPURAM, CHENNAI -600125</p>
+                            </div>
+                        </div>
+
+                        <div class="d-flex gap-3">
+                            <a href="tel:9962647678" class="btn btn-primary fw-bold rounded-3 flex-grow-1"><i class="fas fa-phone me-2"></i>Call Now</a>
+                            <a href="https://wa.me/919962647678" class="btn btn-success fw-bold rounded-3 flex-grow-1"><i class="fab fa-whatsapp me-2"></i>WhatsApp</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-3">AQUA PURE SYSTEM</h5>
+                    <p class="small">Trusted Water Filter Installation & Service</p>
+                    <p class="small">Since 2007 | 22+ Years of Experience</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-3">Contact Us</h6>
+                    <p class="small mb-2"><i class="fas fa-phone me-2"></i>9962647678 / 9677006923</p>
+                    <p class="small mb-2"><i class="fas fa-envelope me-2"></i>meenakshishivaraman@gmail.com</p>
+                    <p class="small"><i class="fas fa-map-marker-alt me-2"></i>No.8, RANI GOPAL COMPLEX, RANIJI NAGAR, MADANANDHAPURAM, CHENNAI -600125</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-3">Connect</h6>
+                    <a href="https://wa.me/919962647678" class="btn btn-sm btn-success w-100 mb-2"><i class="fab fa-whatsapp me-2"></i>WhatsApp Us</a>
+                </div>
+            </div>
+
+            <hr class="bg-secondary my-4">
+
+            <div class="text-center">
+                <p class="small mb-0">&copy; 2024 AQUA PURE SYSTEM. All rights reserved. | Design & Development by Your Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+
+    <!-- Load Recent Gallery Images -->
+    <script>
+        // Load recent gallery images on home page
+        window.addEventListener('DOMContentLoaded', loadRecentGallery);
+
+        async function loadRecentGallery() {
+            try {
+                const response = await fetch('/api/gallery?limit=3');
+                const result = await response.json();
+                const images = result.data || result;
+
+                if (images.length === 0) {
+                    document.getElementById('homeGalleryContainer').innerHTML = `
+                        <div class="col-12 text-center py-5">
+                            <p class="text-muted">Gallery will be updated soon with our latest work</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                displayGalleryPreview(images);
+            } catch (error) {
+                console.error('Error loading gallery:', error);
+                document.getElementById('homeGalleryContainer').innerHTML = `
+                    <div class="col-12 text-center py-5">
+                        <p class="text-muted">Gallery will be updated soon with our latest work</p>
+                    </div>
+                `;
+            }
+        }
+
+        function displayGalleryPreview(images) {
+            const container = document.getElementById('homeGalleryContainer');
+            container.innerHTML = images.slice(0, 3).map((item, index) => {
+                // Determine if it's a video by checking mediaType or file extension
+                const isVideo = item.mediaType === 'video' || (item.imageUrl && (item.imageUrl.endsWith('.mp4') || item.imageUrl.endsWith('.webm') || item.imageUrl.endsWith('.mov') || item.imageUrl.endsWith('.avi')));
+                
+                return `
+                <div class="col-md-6 col-lg-4 fade-in-on-scroll" style="animation-delay: ${index * 0.1}s;">
+                    <a href="gallery.html" style="text-decoration: none;">
+                        <div class="gallery-item rounded-4 overflow-hidden shadow-sm gallery-hover" style="position: relative;">
+                            ${isVideo ? `
+                                <div style="width: 100%; height: 250px; background: #000; position: relative; display: flex; align-items: center; justify-content: center;">
+                                    <video width="100%" height="250" style="object-fit: cover;">
+                                        <source src="${item.imageUrl}" type="video/mp4">
+                                    </video>
+                                    <div style="position: absolute; color: white; font-size: 3rem; opacity: 0.8;">
+                                        <i class="fas fa-play-circle"></i>
+                                    </div>
+                                    <div style="position: absolute; top: 10px; right: 10px; background: #ef4444; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; z-index: 5;">VIDEO</div>
+                                </div>
+                            ` : `
+                                <img src="${item.imageUrl}" alt="${item.title}" style="width: 100%; height: 250px; object-fit: cover; display: block;" onerror="this.src='/assets/placeholder.jpg'">
+                            `}
+                            <div class="gallery-overlay">${isVideo ? 'Play Video' : 'View Gallery'}</div>
+                        </div>
+                    </a>
+                </div>
+            `;
+            }).join('');
+        }
+    </script>
+</body>
+</html>

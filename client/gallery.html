@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - AQUA PURE SYSTEM</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- NAVBAR / HEADER -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand fw-bold d-flex align-items-center" href="index.html">
+                <!-- Logo: Actual logo image -->
+                <img src="assets/images/logo.jpeg" alt="AQUA PURE SYSTEM Logo" style="height: 85px; width: auto; object-fit: contain;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="services.html">Services</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+                    <li class="nav-item"><a class="nav-link" href="reviews.html">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                </ul>
+                <a href="index.html#enquiry-section" class="btn btn-primary ms-3">Get Quote</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- PAGE HERO TITLE SECTION -->
+    <section class="hero-title-section py-5" style="background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);">
+        <div class="container text-center text-white">
+            <p class="small fw-bold text-uppercase letter-spacing fade-in-animation">Our Work</p>
+            <h1 class="display-4 fw-bold mb-3 fade-in-animation">Installation & Service Gallery</h1>
+            <p class="lead fade-in-animation" style="animation-delay: 0.1s;">
+                Real images of our completed water filter installations and maintenance work.
+            </p>
+        </div>
+    </section>
+
+    <!-- GALLERY GRID SECTION -->
+    <section class="py-5">
+        <div class="container">
+            <!-- Gallery Grid Container -->
+            <div id="galleryContainer" class="row g-4">
+                <!-- Gallery items will be loaded here by JavaScript -->
+            </div>
+
+            <!-- Empty State Message (shown when no images) -->
+            <div id="emptyGalleryMessage" class="text-center py-5" style="display: none;">
+                <i class="fas fa-image-slash" style="font-size: 80px; color: #d1d5db; margin-bottom: 20px; display: block;"></i>
+                <h5 class="text-muted">No installation photos available yet.</h5>
+                <p class="text-muted">Please check back soon for our latest work.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY LIGHTBOX MODAL -->
+    <div class="modal fade" id="galleryModal" tabindex="-1" aria-labelledby="galleryModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content rounded-4" style="position: relative; overflow: visible !important;">
+                <button id="galleryCloseBtn" type="button" style="position: absolute !important; top: 15px !important; right: 15px !important; width: 50px !important; height: 50px !important; padding: 0 !important; display: flex !important; align-items: center !important; justify-content: center !important; font-size: 28px !important; border-radius: 50% !important; z-index: 1050 !important; transition: all 0.3s ease !important; background-color: #dc3545 !important; border: none !important; color: white !important; cursor: pointer !important;" aria-label="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+                <div class="modal-body p-0">
+                    <div id="modalImageContainer" style="background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%); height: 500px; display: flex; align-items: center; justify-content: center; border-radius: 15px;">
+                        <i class="fas fa-image" style="font-size: 150px; color: #3b82f6; opacity: 0.3;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NOTE FOR DEVELOPERS -->
+    <!-- 
+        Gallery images & videos structure:
+        - Admin uploads images and videos via secure login panel
+        - Images stored in /server/uploads folder
+        - Videos stored in /server/uploads folder
+        - Customers can view images and videos (no upload option on frontend)
+        - API: GET /api/gallery returns all active media items
+        - Each item has: imageUrl, mediaType (image/video), title, description, category, serviceType
+        - Supports: Images (JPG, PNG, GIF, WebP) and Videos (MP4, WebM, MOV, AVI)
+    -->
+
+    <!-- FOOTER -->
+    <footer class="bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-lg-3 col-md-6">
+                    <h5 class="fw-bold mb-3">AQUA PURE SYSTEM</h5>
+                    <p class="small">Trusted Water Filter Installation & Service</p>
+                    <p class="small">Since 2007 | 22+ Years of Experience</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-3">Quick Links</h6>
+                    <ul class="list-unstyled small">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="gallery.html">Gallery</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="reviews.html">Reviews</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-3">Contact Us</h6>
+                    <p class="small mb-2"><i class="fas fa-phone me-2"></i>9962647678 / 9677006923</p>
+                    <p class="small mb-2"><i class="fas fa-envelope me-2"></i>meenakshishivaraman@gmail.com</p>
+                    <p class="small"><i class="fas fa-map-marker-alt me-2"></i>No.8, RANI GOPAL COMPLEX, RANIJI NAGAR, MADANANDHAPURAM, CHENNAI -600125</p>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h6 class="fw-bold mb-3">Connect</h6>
+                    <a href="https://wa.me/919962647678" class="btn btn-sm btn-success w-100 mb-2"><i class="fab fa-whatsapp me-2"></i>WhatsApp Us</a>
+                </div>
+            </div>
+
+            <hr class="bg-secondary my-4">
+
+            <div class="text-center">
+                <p class="small mb-0">&copy; 2024 AQUA PURE SYSTEM. All rights reserved. | Design & Development by Your Team</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script src="js/script.js"></script>
+    
+    <script>
+        let galleryImages = [];
+
+        // Load gallery images on page load
+        window.addEventListener('DOMContentLoaded', loadGalleryImages);
+
+        async function loadGalleryImages() {
+            try {
+                const response = await fetch('/api/gallery');
+                const result = await response.json();
+                const images = result.data || result;
+
+                if (images.length === 0) {
+                    document.getElementById('galleryContainer').innerHTML = '';
+                    document.getElementById('emptyGalleryMessage').style.display = 'block';
+                    return;
+                }
+
+                galleryImages = images;
+                displayGalleryImages(images);
+            } catch (error) {
+                console.error('Error loading gallery:', error);
+                document.getElementById('emptyGalleryMessage').style.display = 'block';
+            }
+        }
+
+        function displayGalleryImages(images) {
+            const container = document.getElementById('galleryContainer');
+            container.innerHTML = images.map((item, index) => {
+                // Determine if it's a video by checking mediaType or file extension
+                const isVideo = item.mediaType === 'video' || (item.imageUrl && (item.imageUrl.endsWith('.mp4') || item.imageUrl.endsWith('.webm') || item.imageUrl.endsWith('.mov') || item.imageUrl.endsWith('.avi')));
+                
+                return `
+                <div class="col-lg-4 col-md-6 fade-in-on-scroll" style="animation-delay: ${index * 0.1}s;">
+                    <div class="gallery-item-card rounded-4 overflow-hidden shadow-sm gallery-hover cursor-pointer" data-bs-toggle="modal" data-bs-target="#galleryModal" onclick="openGalleryModal(${index})">
+                        ${isVideo ? `
+                            <div style="width: 100%; height: 280px; background: #000; position: relative; display: flex; align-items: center; justify-content: center;">
+                                <video width="100%" height="280" style="object-fit: cover; display: block;">
+                                    <source src="${item.imageUrl}" type="video/mp4">
+                                </video>
+                                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: white; font-size: 3rem; opacity: 0.8;">
+                                    <i class="fas fa-play-circle"></i>
+                                </div>
+                                <div style="position: absolute; top: 10px; right: 10px; background: #ef4444; color: white; padding: 0.25rem 0.75rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700;">VIDEO</div>
+                            </div>
+                        ` : `
+                            <img src="${item.imageUrl}" alt="${item.title}" class="gallery-image" style="width: 100%; height: 280px; object-fit: cover; display: block;" onerror="this.src='/assets/placeholder.jpg'">
+                        `}
+                        <div class="gallery-overlay">
+                            <span class="overlay-text"><i class="fas fa-expand me-2"></i>${isVideo ? 'Play' : 'View'} Work</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+            }).join('');
+        }
+
+        function openGalleryModal(index) {
+            if (!galleryImages[index]) return;
+            
+            const item = galleryImages[index];
+            const isVideo = item.mediaType === 'video' || (item.imageUrl && (item.imageUrl.endsWith('.mp4') || item.imageUrl.endsWith('.webm') || item.imageUrl.endsWith('.mov') || item.imageUrl.endsWith('.avi')));
+            const modalContainer = document.getElementById('modalImageContainer');
+            
+            modalContainer.innerHTML = `
+                <div style="width: 100%;">
+                    ${isVideo ? `
+                        <video width="100%" height="500" style="object-fit: contain; display: block; background: #000;" controls>
+                            <source src="${item.imageUrl}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    ` : `
+                        <img src="${item.imageUrl}" alt="${item.title}" style="width: 100%; height: 500px; object-fit: contain; display: block;" onerror="this.src='/assets/placeholder.jpg'">
+                    `}
+                    <div style="padding: 1rem; background: #f8f9fa;">
+                        <h5 class="mb-2">${item.title}</h5>
+                        <p class="small text-muted mb-1"><strong>Type:</strong> ${isVideo ? 'Video' : 'Image'}</p>
+                        <p class="small text-muted mb-1"><strong>Category:</strong> ${item.category}</p>
+                        <p class="small text-muted mb-1"><strong>Service:</strong> ${item.serviceType}</p>
+                        ${item.description ? `<p class="small mb-0"><strong>Description:</strong> ${item.description}</p>` : ''}
+                    </div>
+                </div>
+            `;
+        }
+
+        // Handle gallery modal close button with red color and hover
+        const galleryModalElement = document.getElementById('galleryModal');
+        const galleryCloseBtn = document.getElementById('galleryCloseBtn');
+        
+        galleryCloseBtn.addEventListener('mouseover', function() {
+            this.style.backgroundColor = '#cc0000';
+            this.style.transform = 'scale(1.1)';
+            this.style.boxShadow = '0 4px 12px rgba(220, 53, 69, 0.5)';
+        });
+        
+        galleryCloseBtn.addEventListener('mouseout', function() {
+            this.style.backgroundColor = '#dc3545';
+            this.style.transform = 'scale(1)';
+            this.style.boxShadow = 'none';
+        });
+        
+        galleryCloseBtn.addEventListener('click', function() {
+            const modal = bootstrap.Modal.getInstance(galleryModalElement);
+            if (modal) {
+                modal.hide();
+            }
+        });
+    </script>
+</body>
+</html>

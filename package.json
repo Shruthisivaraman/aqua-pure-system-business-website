@@ -1,0 +1,71 @@
+{
+  "name": "aqua-pure-system",
+  "version": "1.0.0",
+  "description": "AQUA PURE SYSTEM - Water Filter Installation & Maintenance Services Website",
+  "main": "server/server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server/server.js",
+    "dev": "nodemon server/server.js",
+    "test": "jest --detectOpenHandles",
+    "lint": "eslint .",
+    "build": "echo 'Build script not needed for this project'",
+    "seed": "node server/seeds/seedData.js"
+  },
+  "author": "AQUA PURE SYSTEM Team",
+  "license": "MIT",
+  "keywords": [
+    "water",
+    "filter",
+    "purifier",
+    "installation",
+    "maintenance",
+    "repair",
+    "service"
+  ],
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "multer": "^1.4.5-lts.1",
+    "twilio": "^3.75.0",
+    "helmet": "^7.0.0",
+    "express-validator": "^7.0.0",
+    "compression": "^1.7.4",
+    "body-parser": "^1.20.2",
+    "joi": "^17.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20",
+    "jest": "^29.5.0",
+    "supertest": "^6.3.3",
+    "eslint": "^8.40.0",
+    "prettier": "^2.8.8"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "uploads/*",
+      "*.log"
+    ],
+    "delay": 500
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/aqua-pure-system.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/aqua-pure-system/issues"
+  },
+  "homepage": "https://github.com/yourusername/aqua-pure-system#readme"
+}
